@@ -39,9 +39,12 @@ client.on('message', message => {
     else if (command=='youtube') {
         client.commands.get('youtube').execute(message, args);
     }
+    else if (command=='timer') {
+        client.commands.get('timer').execute(message, args);
+    }
 });
 
 
 
-client.login('OTEzMjE3MDA4MDQ3MzkwNzgw.YZ7RnQ.kOIF3en5So6nDRD0rX2ktPTbobk');
+client.login('OTEzMjE3MDA4MDQ3MzkwNzgw.YZ7RnQ.8WgJciDv5xj5kruKhbPncb2_MhE');
 
