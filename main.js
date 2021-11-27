@@ -1,4 +1,5 @@
 const Discord = require('discord.js'); //get const Disc to communicate with all of our node modules
+const {token} = require('./token.js');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 
@@ -43,5 +44,5 @@ client.on('message', message => {
 
 
 
-client.login('OTEzMjE3MDA4MDQ3MzkwNzgw.YZ7RnQ.kOIF3en5So6nDRD0rX2ktPTbobk');
+client.login(token);
 
