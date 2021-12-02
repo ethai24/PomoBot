@@ -76,7 +76,6 @@ Inspiration, code snippets, etc.
 
 ## Backlog
 
-* Rest Timer
 * Earn points by study session
 * Use points to roll for Genshin Characters
 * Music during studying / Alarm when work session is over
