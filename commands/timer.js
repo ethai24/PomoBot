@@ -2,12 +2,11 @@ const minToMs = (minutes) => {
   return minutes * 60000;
 };
 
-const updateTimer = (prevMessage, timeLeft) => {
+const updateTimer = (sentMessage, timeLeft) => {
+  // delete trailing number and decimal
+  sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
   if (timeLeft > 0) {
-    prevMessage.edit(timeLeft + " minutes remaining");
-    setTimeout(() => updateTimer(prevMessage, timeLeft - 1), 60000);
-  } else {
-    prevMessage.edit("Time's up!");
+    setTimeout(() => updateTimer(sentMessage, timeLeft-1), minToMs(1));
   }
 };
 
@@ -15,7 +14,7 @@ module.exports = {
   name: "timer",
   description:
     "This is a Pomodoro timer command! \
-                usage: command WorkTime RestTime",
+                usage: -timer WorkTime RestTime",
   execute(message, args) {
     let workTime = 25; // default Pomodoro work timer in minutes
     let restTime = 5;
@@ -26,9 +25,15 @@ module.exports = {
       restTime = args[1];
     }
     message.channel
-      .send(workTime + " minutes remaining")
+      .send("Working minutes remaining: " + workTime)
       .then((sentMessage) => {
         updateTimer(sentMessage, workTime);
       });
+
+    setTimeout(()=> {
+      message.channel.send("Time for a break!");
+      message.channel.send("Break minutes remaining: " + restTime).then((sentMessage) => {
+        updateTimer(sentMessage, restTime);
+      })}, minToMs(workTime));
   },
 };

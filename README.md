@@ -81,3 +81,4 @@ Inspiration, code snippets, etc.
 * Use points to roll for Genshin Characters
 * Music during studying / Alarm when work session is over
 * Make rooms for break time and work time and mute users in work room
+* Set up bot server to always be online
