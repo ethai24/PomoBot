@@ -6,7 +6,7 @@ const updateTimer = (sentMessage, timeLeft) => {
   // delete trailing number and decimal
   sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
   if (timeLeft > 0) {
-    setTimeout(() => updateTimer(sentMessage, timeLeft-1), minToMs(1));
+    setTimeout(() => updateTimer(sentMessage, timeLeft - 1), minToMs(1));
   }
 };
 
@@ -30,10 +30,13 @@ module.exports = {
         updateTimer(sentMessage, workTime);
       });
 
-    setTimeout(()=> {
+    setTimeout(() => {
       message.channel.send("Time for a break!");
-      message.channel.send("Break minutes remaining: " + restTime).then((sentMessage) => {
-        updateTimer(sentMessage, restTime);
-      })}, minToMs(workTime));
+      message.channel
+        .send("Break minutes remaining: " + restTime)
+        .then((sentMessage) => {
+          updateTimer(sentMessage, restTime);
+        });
+    }, minToMs(workTime));
   },
 };
