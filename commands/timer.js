@@ -2,11 +2,11 @@ const minToMs = (minutes) => {
   return minutes * 60000;
 };
 
-const updateTimer = (sentMessage, timeLeft) => {
+const updateTimer = async (sentMessage, timeLeft) => {
   // delete trailing number and decimal
   sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
   if (timeLeft > 0) {
-    setTimeout(() => updateTimer(sentMessage, timeLeft - 1), minToMs(1));
+    return setTimeout(() => updateTimer(sentMessage, timeLeft - 1), minToMs(1));
   }
 };
 
@@ -24,19 +24,15 @@ module.exports = {
     if (!isNaN(args[1])) {
       restTime = args[1];
     }
-    message.channel
-      .send("Working minutes remaining: " + workTime)
+    message.channel.send("Working minutes remaining: " + workTime)
       .then((sentMessage) => {
-        updateTimer(sentMessage, workTime);
+        updateTimer(sentMessage, workTime)
+      .then(() => {
+        message.channel.send("Time for a break!");
+        message.channel.send("Break minutes remaining: " + restTime)
+      .then((sentMessage) => updateTimer(sentMessage, restTime)
+      .then(() => message.channel.send("Congrats, you've earned " + workTime * 100 + " points!!")));
       });
-
-    setTimeout(() => {
-      message.channel.send("Time for a break!");
-      message.channel
-        .send("Break minutes remaining: " + restTime)
-        .then((sentMessage) => {
-          updateTimer(sentMessage, restTime);
-        });
-    }, minToMs(workTime));
+    });
   },
 };
