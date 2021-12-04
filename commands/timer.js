@@ -2,11 +2,14 @@ const minToMs = (minutes) => {
   return minutes * 60000;
 };
 
+// will send message and edit time left every minute
 const updateTimer = async (sentMessage, timeLeft) => {
-  // delete trailing number and decimal
-  sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
   if (timeLeft > 0) {
+    // delete trailing number and decimal
+    sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
     return setTimeout(() => updateTimer(sentMessage, timeLeft - 1), minToMs(1));
+  } else {
+    sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "0"));
   }
 };
 
