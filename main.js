@@ -3,7 +3,7 @@ const fs = require("fs"); //to get into other js files
 const { token, MongoDB } = require("./token.js");
 const mongoose = require("mongoose");
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBER_ADD"] });
 const prefix = "-";
 
 client.commands = new Discord.Collection();
