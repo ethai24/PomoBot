@@ -1,25 +1,22 @@
-const Discord = require("discord.js"); //get const Disc to communicate with all of our node modules
+const Discord = require("discord.js");
 const fs = require("fs"); //to get into other js files
 const { token, MongoDB } = require("./token.js");
 const mongoose = require("mongoose");
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBER_ADD"] });
-const prefix = "-";
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
 client.commands = new Discord.Collection();
 
-const commandFiles = fs
-  .readdirSync("./commands/")
-  .filter((file) => file.endsWith(".js")); //check files are js, tells it to go into commands folder
+['command_handler'].forEach(handler => {
+  require(`./handlers/${handler}`)(Discord, client);
+})
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
-}
 
 client.once("ready", () => {
   console.log("EasyBot is online!");
 });
+
+const prefix = "-";
 
 client.on("messageCreate", (message) => {
   //if doesnt start with prefix or if the bot is the author
