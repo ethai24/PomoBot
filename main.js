@@ -8,7 +8,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 client.commands = new Discord.Collection();
 
 ['command_handler'].forEach(handler => {
-  require(`./handlers/${handler}`)(Discord, client);
+  require(`./handlers/${handler}`)(client, Discord);
 })
 
 

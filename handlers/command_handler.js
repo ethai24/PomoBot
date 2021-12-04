@@ -1,8 +1,10 @@
 const fs = require('fs');
 
 module.exports = (client, Discord) => {
+    
+
     //check files are js, tells it to go into commands folder
-    const commandFiles = fs.readdirSync("../commands/")
+    const commandFiles = fs.readdirSync("./commands/")
       .filter((file) => file.endsWith(".js")); 
 
     // add all commands to from commands folder to bot
