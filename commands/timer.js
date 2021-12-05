@@ -2,24 +2,19 @@ const minToMs = (minutes) => {
   return minutes * 60000;
 };
 
-// delay next function call for t ms
-const delay = ms => new Promise((resolve, reject) => setTimeout(() => resolve, ms));
-
-// will send message and edit time left every minute
-const printTimeRemaining = (sentMessage, time) => {
-  const updateTimer = (timeLeft) => new Promise(resolve => {
-    if (timeLeft > 0) {
-      setTimeout(()=> {
-        timeLeft--;
-        sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
-        updateTimer(timeLeft).then(resolve());
-      }, 5000);
-    } else {
-      resolve(sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "0")));
-    }
-  });
-  return updateTimer(time);
-};
+// will edit message every minute
+const updateTimer = (sentMessage, timeLeft) => new Promise(resolve => {
+  if (timeLeft > 0) {
+    setTimeout(()=> {
+      timeLeft--;
+      //REGEX TO REMOVE LAST DIGIT OF MESSAGE and REPLACE WITH 
+      sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
+      resolve(updateTimer(sentMessage, timeLeft));
+    }, minToMs(1));
+  } else {
+    resolve(sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "0")));
+  }
+});
 
 module.exports = {
   name: "timer",
@@ -36,11 +31,11 @@ module.exports = {
       restTime = args[1];
     }
     
-    message.channel.send("Working minutes remaining: " + workTime).then((workMessage) => 
-    printTimeRemaining(workMessage, workTime));
-    //.then(()=>message.channel.send("Time for a break!"));
-    // let breakMessage = message.channel.send("Break minutes remaining: " + restTime)
-    // await updateTimer(breakMessage, restTime);
-    //  message.channel.send("Congrats, you've earned " + workTime * 100 + " points!!");
+    message.channel.send("Working minutes remaining: " + workTime)
+    .then((workMessage) => updateTimer(workMessage, workTime)
+    .then(() => message.channel.send("Time for a break!")
+    .then(message.channel.send("Break minutes remaining: " + restTime)
+    .then((restMessage) => updateTimer(restMessage, restTime)
+    .then(() => message.channel.send("Congrats, you've earned " + workTime * 100 + " points!!"))))));
   },
 };
