@@ -52,6 +52,8 @@ command to run if program contains helper info
 Contributors names and contact info
 
 Kenny Luu (kennyluuluu@gmail.com)
+Jacky Chen (jacky.chen0319@gmail.com)
+Eric Thai (ethai@usc.edu)
 
 <!-- ## Version History
 
