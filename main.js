@@ -1,16 +1,15 @@
-const Discord = require("discord.js");
-const { token, MongoDB } = require("./token.js");
-const mongoose = require("mongoose");
+const Discord = require('discord.js');
+const mongoose = require('mongoose');
+const { token, MongoDB } = require('./token.js');
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
-
+const client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
-['command_handler', 'event_handler'].forEach(handler => {
+['command_handler', 'event_handler'].forEach((handler) => {
   require(`./handlers/${handler}`)(client, Discord);
-})
+});
 
 client.login(token);
 
@@ -20,7 +19,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connected to the database!");
+    console.log('Connected to the database!');
   })
   .catch((err) => {
     console.log(err);

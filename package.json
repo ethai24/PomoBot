@@ -12,5 +12,9 @@
     "discord.js": "^13.3.1",
     "express": "^4.17.1",
     "mongoose": "^6.0.14"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
   }
 }
