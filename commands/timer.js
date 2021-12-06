@@ -8,7 +8,7 @@ const updateTimer = (sentMessage, timeLeft) => new Promise(resolve => {
     setTimeout(()=> {
       timeLeft--;
       //REGEX TO REMOVE LAST DIGIT OF MESSAGE and REPLACE WITH 
-      sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, "") + timeLeft);
+      sentMessage.edit(sentMessage["content"].replace(/(\d.)*\d+$/, timeLeft));
       resolve(updateTimer(sentMessage, timeLeft));
     }, minToMs(1));
   } else {
