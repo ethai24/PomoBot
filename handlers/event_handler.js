@@ -2,7 +2,8 @@ const fs = require('fs');
 
 module.exports = (client, Discord) => {
   // check files are js, tells it to go into events folder
-  const eventFiles = fs.readdirSync('./events/')
+  const eventFiles = fs
+    .readdirSync('./events/')
     .filter((file) => file.endsWith('.js'));
 
   // add all events from events folder to bot
