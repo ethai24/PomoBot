@@ -9,5 +9,7 @@ module.exports = (client, Discord, message) => {
   // command handler
   if (command === 'timer') {
     client.commands.get('timer').execute(message, args);
+  } else if (command === 'addTestUser') {
+    client.commands.get('addTestUser').execute(client, message, args);
   }
 };

@@ -7,3 +7,5 @@ const profileSchema = new mongoose.Schema({
 });
 
 const model = mongoose.model('ProfileModels', profileSchema);
+
+module.exports = model;
