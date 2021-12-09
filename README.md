@@ -5,6 +5,7 @@ Pomobot is a discord bot to set study/work and break timers in discord and recor
 ## Commands
 
 Timer - Start a timer for a working session. By default, the work duration will be 25 minutes with 5 minute breaks.
+
 ```bash
 -timer work_time break_time
 ```
@@ -13,16 +14,16 @@ Timer - Start a timer for a working session. By default, the work duration will 
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [NodeJS](https://nodejs.org/)
-* [DiscordJS](https://discord.js.org/)
-* [MongoDB](https://mongodb.com/)
+- [NodeJS](https://nodejs.org/)
+- [DiscordJS](https://discord.js.org/)
+- [MongoDB](https://mongodb.com/)
 
 ## Getting Started
 
 ### Dependencies
 
-* Discord.js v13
-* Node v16.6.0
+- Discord.js v13
+- Node v16.6.0
 
 ### Installing
 
@@ -34,8 +35,9 @@ git clone https://github.com/ethai24/PomoBot.git
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+- How to run the program
+- Step-by-step bullets
+
 ```
 code blocks for commands
 ```
@@ -43,6 +45,7 @@ code blocks for commands
 ## Help
 
 Any advise for common problems or issues.
+
 ```
 command to run if program contains helper info
 ```
@@ -78,8 +81,10 @@ Inspiration, code snippets, etc.
 
 ## Backlog
 
-* Earn points by study session
-* Use points to roll for Genshin Characters
-* Music during studying / Alarm when work session is over
-* Make rooms for break time and work time and mute users in work room
-* Set up bot server to always be online
+- Display leaderboard for points
+- Add more fields in MongoDB such as discord username
+- Create room during timer and award entire room with points
+- Use points to roll for Genshin Characters
+- Music during studying / Alarm when work session is over
+- Make rooms for break time and work time and mute users in work room
+- Set up bot server to always be online
