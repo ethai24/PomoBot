@@ -30,5 +30,7 @@ module.exports = async (client, Discord, message) => {
   } else if (command === 'addtestuser') {
     // THIS COMMAND WILL SIMULATE A DISCORD USER JOIN THE SERVER
     client.commands.get('addTestUser').execute(client, message, args);
+  } else if (command === 'points') {
+    client.commands.get('points').execute(message, args);
   }
 };
