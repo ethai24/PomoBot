@@ -7,7 +7,15 @@ const minToMs = (minutes) => {
 // will edit message every minute
 const updateTimer = (sentMessage, timeLeft) =>
   new Promise((resolve) => {
-    if (timeLeft > 0) {
+    if (timeLeft > 0 && timeLeft < 1) {
+      setTimeout(() => {
+        //REGEX TO REMOVE LAST DIGIT OF MESSAGE and REPLACE WITH
+        sentMessage.edit(
+          sentMessage['content'].replace(/(\d.)*\d+$/, timeLeft),
+        );
+        resolve(updateTimer(sentMessage, 0));
+      }, minToMs(timeLeft));
+    } else if (timeLeft > 0) {
       setTimeout(() => {
         timeLeft--;
         //REGEX TO REMOVE LAST DIGIT OF MESSAGE and REPLACE WITH
@@ -46,15 +54,28 @@ module.exports = {
     if (!isNaN(args[1])) {
       restTime = args[1];
     }
+
+    let voiceChannel = message.guild.channels.cache.find(
+      (c) =>
+        c.type == 'GUILD_VOICE' &&
+        c.members.get(message.author.id) !== undefined,
+    );
+    let memberIDs = [];
+    voiceChannel.members.forEach((value, key) => memberIDs.push(key));
+    console.log(memberIDs);
+
     // prettier-ignore
     message.channel.send('Working minutes remaining: ' + workTime)
     .then((workMessage) => updateTimer(workMessage, workTime)
     .then(() => message.channel.send('Time for a break!')
     .then(message.channel.send('Break minutes remaining: ' + restTime)
     .then((restMessage) => updateTimer(restMessage, restTime)
-    .then(() => updateUserPoints(message.author.id, workTime)
-      .then(() => message.channel.send("Congrats, you've earned " +workTime * 100 + ' points!!'))
-      .catch((err) => console.log(err))
+    .then(() => {
+        let allPromises = [];
+        memberIDs.forEach(memberID => allPromises.push(updateUserPoints(memberID, workTime)));
+        Promise.all(allPromises).then(() => message.channel.send("Congrats, you've earned " +workTime * 100 + ' points!!'))
+        .catch((err) => console.log(err))
+    }
     )))));
   },
 };

@@ -11,7 +11,7 @@ module.exports = {
     getUserPoints(message.author.id)
       .then((profile) =>
         message.channel.send(
-          'User' + profile.userID + ' has ' + profile.points + ' points',
+          '<@' + profile.userID + '> has ' + profile.points + ' points',
         ),
       )
       .catch((err) => console.log(err));
