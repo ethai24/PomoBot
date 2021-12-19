@@ -82,9 +82,6 @@ Inspiration, code snippets, etc.
 
 ## Backlog
 
-- Display leaderboard for points
-- Add more fields in MongoDB such as discord username
-- Create room during timer and award entire room with points
 - Use points to roll for Genshin Characters
 - Music during studying / Alarm when work session is over
 - Make rooms for break time and work time and mute users in work room
