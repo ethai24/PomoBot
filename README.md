@@ -56,7 +56,7 @@ Contributors names and contact info
 
 Kenny Luu (kennyluuluu@gmail.com) <br/>
 Eric Thai (ericthai@usc.edu) <br/>
-Richard Pham ()
+Richard Pham () <br/>
 Jacky Chen (jacky.chen0319@gmail.com) <br/>
 
 <!-- ## Version History
