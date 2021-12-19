@@ -32,5 +32,7 @@ module.exports = async (client, Discord, message) => {
     client.commands.get('addTestUser').execute(client, message, args);
   } else if (command === 'points') {
     client.commands.get('points').execute(message, args);
+  } else if (command === 'display') {
+    client.commands.get('display').execute(message, args);
   }
 };
